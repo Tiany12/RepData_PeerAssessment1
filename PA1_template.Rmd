@@ -17,7 +17,7 @@ activity$date <- as.Date(activity$date, format = "%Y-%m-%d")
 ## What is mean total number of steps taken per day?
 Caluculate the total number of steps per day
 ```{Total number}
-dailysteps <- aggergate(activity$steps, by =list(activity$date), FUN = sum, na.rm = TRUE)
+dailysteps <- aggregate(activity$steps, by =list(activity$date), FUN = sum, na.rm = TRUE)
 ```
 Make a histogram
 ```{Histogram}
@@ -76,7 +76,7 @@ The mean is greater and the median is the same
 Create a new factor variable in the dataset with two levels – “weekday” and “weekend” indicating whether a given date is a weekday or weekend day.
 ```{Create a new function}
 DayType <- function(date){
-ifelse(weekday(date) %in% c("Saturday","Sunday"), "weekend","weekday")
+ifelse(weekdays(date) %in% c("Saturday","Sunday"), "weekend","weekday")
 }
 completeactivity$day.type <- factor(DayType(completeactivity$date))
 completedailyactivity <- aggregate(completeactivity$steps,by = list(completeactivity$interval,completeactivity$day.type),FUN = mean)
