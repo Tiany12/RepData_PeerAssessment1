@@ -15,15 +15,61 @@ activity$date <- as.Date(activity$date, format = "%Y-%m-%d")
 ```
 
 ## What is mean total number of steps taken per day?
-
-
+Caluculate the total number of steps per day
+```{Total number}
+dailysteps <- aggergate(activity$steps, by =list(activity$date), FUN = sum, na.rm = TRUE)
+```
+Make a histogram
+```{Histogram}
+colnames(dailysteps) <- c("date","steps")
+hist(dailysteps$steps,main = "Daily Steps", xlab = "Number of steps")
+```
+Calculate the mean and median of total number of steps taken per day
+```{Calculate}
+mean(dailysteps$steps)
+median(dailysteps$steps)
+```
 
 ## What is the average daily activity pattern?
+Make a time series plot (i.e. type = "l") of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all days (y-axis)
+```{Make a time-series plot}
+dailyactivity <- aggregate(activity$steps,by = list(activity$interval),FUN = mean,na.rm = TRUE)
+colnames(dailyactivity) = c("interval","steps")
+plot(dailyactivity$interval, dailyactivity$steps, type = "l", xlab = "Interval", ylab = "Number of steps")
+```
+Which 5-minute interval, on average across all the days in the dataset, contains the maximum number of steps?
+```{Find max}
+dailyactivity$interval[which.max(dailyactivity$steps)]
+```
 
 
 
 ## Imputing missing values
-
-
-
+Calculate and report the total number of missing values in the dataset (i.e. the total number of rows with NAs)
+```{Calculate}
+nrow(activity) - sum(complete.cases(activity))
+```
+Devise a strategy for filling in all of the missing values in the dataset. The strategy does not need to be sophisticated. For example, you could use the mean/median for that day, or the mean for that 5-minute interval, etc.
+```{Fill in all missing value}
+FillInInterval <- function(interval){
+avg = dailyactivity[(interval/5)+1,2]
+ifelse(is.na(avg),0,avg)
+}
+```
+Create a new dataset that is equal to the original dataset but with the missing data filled in.
+```{Create a new data set}
+completeactivity<- activity
+completeactivity$steps <- ifelse(
+    is.na(activity$steps),FillInInterval(activity$interval),activity$steps
+  )
+```
+Make a histogram of the total number of steps taken each day and Calculate and report the mean and median total number of steps taken per day. 
+```{Make a histogram}
+completedailysteps <- aggregate(completeactivity$steps,by = list(completeactivity$date),FUN = sum)
+colnames(completedailysteps) <- c("date","steps")
+hist(completedailysteps$steps,main = "Daily Steps (Imputed data)",xlab = "Number of steps")
+mean(completedailysteps$steps)
+median(completedailysteps$steps)
+```
+The mean is greater and the median is the same
 ## Are there differences in activity patterns between weekdays and weekends?
