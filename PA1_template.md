@@ -22,12 +22,16 @@ Make a histogram
 colnames(dailysteps) <- c("date","steps")
 hist(dailysteps$steps,main = "Daily Steps", xlab = "Number of steps")
 ```
+![image](https://github.com/Tiany12/RepData_PeerAssessment1/blob/master/instructions_fig/Daily%20Steps.png)
+
 Calculate the mean and median of total number of steps taken per day
 
 ```calculate
 mean(dailysteps$steps)
 median(dailysteps$steps)
 ```
+###mean = 9354.23
+###median = 10395
 
 ## What is the average daily activity pattern?
 Make a time series plot (i.e. type = "l") of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all days (y-axis)
@@ -37,12 +41,14 @@ dailyactivity <- aggregate(activity$steps,by = list(activity$interval),FUN = mea
 colnames(dailyactivity) = c("interval","steps")
 plot(dailyactivity$interval, dailyactivity$steps, type = "l", xlab = "Interval", ylab = "Number of steps")
 ```
+![image](https://github.com/Tiany12/RepData_PeerAssessment1/blob/master/instructions_fig/Num.%20of%20steps.png)
+
 Which 5-minute interval, on average across all the days in the dataset, contains the maximum number of steps?
 
 ```find
 dailyactivity$interval[which.max(dailyactivity$steps)]
 ```
-
+###max steps = 835
 
 
 ## Imputing missing values
@@ -76,6 +82,10 @@ hist(completedailysteps$steps,main = "Daily Steps (Imputed data)",xlab = "Number
 mean(completedailysteps$steps)
 median(completedailysteps$steps)
 ```
+![imagine](https://github.com/Tiany12/RepData_PeerAssessment1/blob/master/instructions_fig/Daily%20steps%20with%20imputed%20data.png)
+
+###mean = 10282.14
+###median = 10395
 The mean is greater and the median is the same
 ## Are there differences in activity patterns between weekdays and weekends?
 Create a new factor variable in the dataset with two levels – “weekday” and “weekend” indicating whether a given date is a weekday or weekend day.
@@ -94,3 +104,4 @@ Make a panel plot containing a time series plot (i.e. type = "l") of the 5-minut
 library(lattice)
 with(completedailyactivity, xyplot(steps ~ interval | day.type, ylab = "Number of steps", xlab = "Interval"), layout = c(2,1), type = "l")
 ```
+![imagine](https://github.com/Tiany12/RepData_PeerAssessment1/blob/master/instructions_fig/Num.%20of%20steps%20by%20weekday.png)
