@@ -29,7 +29,7 @@ colnames(dailysteps) <- c("date","steps")
 hist(dailysteps$steps,main = "Daily Steps", xlab = "Number of steps")
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-3-1.png)
+![image](https://github.com/Tiany12/RepData_PeerAssessment1/blob/master/instructions_fig/Daily%20Steps.png)
 
 Calculate the mean and median of total number of steps taken per day
 
@@ -58,7 +58,7 @@ colnames(dailyactivity) = c("interval","steps")
 plot(dailyactivity$interval, dailyactivity$steps, type = "l", xlab = "Interval", ylab = "Number of steps")
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-5-1.png)
+![imagine](https://github.com/Tiany12/RepData_PeerAssessment1/blob/master/instructions_fig/Num.%20of%20steps.png)
 
 Which 5-minute interval, on average across all the days in the dataset, contains the maximum number of steps?
 
@@ -106,7 +106,7 @@ colnames(completedailysteps) <- c("date","steps")
 hist(completedailysteps$steps,main = "Daily Steps (Imputed data)",xlab = "Number of steps")
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-10-1.png)
+![imagine](https://github.com/Tiany12/RepData_PeerAssessment1/blob/master/instructions_fig/Daily%20steps%20with%20imputed%20data.png)
 
 ```r
 mean(completedailysteps$steps)
@@ -144,4 +144,4 @@ library(lattice)
 with(completedailyactivity, xyplot(steps ~ interval | day.type, ylab = "Number of steps", xlab = "Interval"), layout = c(2,1), type = "l")
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-12-1.png)
+![imagine](https://github.com/Tiany12/RepData_PeerAssessment1/blob/master/instructions_fig/Num.%20of%20steps%20by%20weekday.png)
